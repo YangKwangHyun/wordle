@@ -6,27 +6,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TryCat</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite('resources/css/app.css')
 </head>
 <body>
     <div id="game">
-        <div class="row">
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--        </div>--}}
 
-        <div class="row">
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--        </div>--}}
 
-        <div class="row">
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--            <div class="tile"></div>--}}
+{{--        </div>--}}
     </div>
+
+    @vite('resources/js/app.js')
 </body>
 </html>
