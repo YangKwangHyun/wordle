@@ -1,6 +1,4 @@
-let grid = document.querySelector('#game');
-
-
-let guessesAllowed = 4;
-let wordLength = 3;
-
+import game from './game';
+document.addEventListener('alpine:init', () => {
+    Alpine.data('game', () => game);
+});
