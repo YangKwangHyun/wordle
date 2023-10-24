@@ -4,8 +4,9 @@ export default {
 
     guessesAllowed: 3,
     theWord: 'cat',
-    wordLength: 3,
     currentRowIndex: 0,
+    state: 'active',
+    message: '',
 
     get currentGuess() {
         return this.currentRow.map(tile => tile.letter).join('');
@@ -13,11 +14,13 @@ export default {
 
     init() {
         this.board = Array.from({length: this.guessesAllowed}, () => {
-            return Array.from({length: this.wordLength}, () => new Tile);
+            return Array.from({length: this.theWord.length}, () => new Tile);
         })
     },
 
     onKeyPress(key) {
+        this.message = '';
+
         if (/^[A-z]$/.test(key)) {
             this.fillTile(key);
         } else if (key === 'Enter') {
@@ -38,14 +41,18 @@ export default {
     submitGuess() {
         let guess = this.currentGuess;
 
-        if (this.currentGuess.length < this.wordLength) {
+        if (this.currentGuess.length < this.theWord.length) {
             return;
         }
 
         if (guess === this.theWord) {
-            alert('You win!');
+            this.message = 'You Win!';
+        } else if(this.guessesAllowed === this.currentRowIndex + 1) {
+            this.message = 'Game Over. You Lose.';
+
+            this.state = 'complete';
         } else {
-            alert('Nope!');
+            this.message = 'Incorrect';
 
             this.currentRowIndex++;
         }

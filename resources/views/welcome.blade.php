@@ -11,19 +11,20 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
-    <div
-        id="game"
-        x-data="game"
-        @keyup.window="onKeyPress($event.key)"
-    >
-        <template x-for="row in board">
-            <div class="row">
-                <template x-for="tile in row">
-                    <div class="tile" x-text="tile.letter"></div>
-                </template>
-            </div>
-        </template>
-    </div>
+    <main x-data="game"
+          @keyup.window="onKeyPress($event.key)">
+        <div id="game">
+            <template x-for="row in board">
+                <div class="row">
+                    <template x-for="tile in row">
+                        <div class="tile" x-text="tile.letter"></div>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <output x-text="message"></output>
+    </main>
 
 </body>
 </html>
