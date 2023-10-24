@@ -45,9 +45,12 @@ export default {
             return;
         }
 
+        // update the tile colors
+        this.refreshStatusForCurrentRow();
+
         if (guess === this.theWord) {
             this.message = 'You Win!';
-        } else if(this.guessesAllowed === this.currentRowIndex + 1) {
+        } else if (this.guessesAllowed === this.currentRowIndex + 1) {
             this.message = 'Game Over. You Lose.';
 
             this.state = 'complete';
@@ -56,6 +59,17 @@ export default {
 
             this.currentRowIndex++;
         }
+
+    },
+
+    refreshStatusForCurrentRow() {
+        this.currentRow.forEach((tile, index) => {
+            tile.status = this.theWord.includes(tile.letter) ? 'present' : 'absent';
+
+            if(this.currentGuess[index] === this.theWord[index]) {
+                tile.status = 'correct';
+            }
+        });
     },
 
     get currentRow() {
