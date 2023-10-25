@@ -24,7 +24,7 @@ export default {
 
     init() {
         this.board = Array.from({length: this.guessesAllowed}, () => {
-            return Array.from({length: this.theWord.length}, () => new Tile);
+            return Array.from({length: this.theWord.length}, (item, index) => new Tile(index));
         })
     },
 
@@ -64,16 +64,13 @@ export default {
     submitGuess() {
         if (this.currentGuess.length < this.theWord.length) return;
 
-        if(! words.includes(this.currentGuess.toUpperCase())) {
+        if (!words.includes(this.currentGuess.toUpperCase())) {
             this.errors = true;
 
             return this.message = 'Invalid Word...';
         }
 
-        // update the tile colors
-        for (let tile of this.currentRow) {
-            tile.updateStatus(this.currentGuess, this.theWord);
-        }
+        Tile.updateStatusesForRow(this.currentRow, this.theWord);
 
         if (this.currentGuess === this.theWord) {
             this.state = 'complete';
