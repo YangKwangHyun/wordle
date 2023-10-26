@@ -13,7 +13,7 @@ export default {
     letters: [
         'QWERTYUIOP'.split(""),
         'ASDFGHJKL'.split(""),
-        ["Enter",...'ZXCVBNM'.split(""), "Backspace"]
+        ["Enter", ...'ZXCVBNM'.split(""), "Backspace"]
     ],
 
     get currentRow() {
@@ -32,6 +32,14 @@ export default {
         this.board = Array.from({length: this.guessesAllowed}, () => {
             return Array.from({length: this.theWord.length}, (item, index) => new Tile(index));
         })
+    },
+
+    matchingTileForKey(key) {
+        return this.board
+            .flat()
+            .filter((tile) => tile.status)
+            .sort((t1,t2) => t2.status === 'correct')
+            .find((tile) => tile.letter === key.toLowerCase());
     },
 
     onKeyPress(key) {
