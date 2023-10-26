@@ -1,10 +1,10 @@
 import Tile from "./Tile";
-import words from "./words";
+import {allWords, theWords} from "./words";
 
 export default {
 
     guessesAllowed: 3,
-    theWord: 'cat',
+    theWord: theWords[Math.floor(Math.random() * theWords.length)],
     currentRowIndex: 0,
     state: 'active',
     errors: false,
@@ -38,7 +38,9 @@ export default {
         return this.board
             .flat()
             .filter((tile) => tile.status)
-            .sort((t1,t2) => t2.status === 'correct')
+            .sort((t1,t2) => {
+              return t1.status === 'correct' ? -1 : 1;
+            })
             .find((tile) => tile.letter === key.toLowerCase());
     },
 
@@ -78,30 +80,24 @@ export default {
     submitGuess() {
         if (this.currentGuess.length < this.theWord.length) return;
 
-        if (!words.includes(this.currentGuess.toUpperCase())) {
+        if (!allWords.includes(this.currentGuess.toUpperCase())) {
             this.errors = true;
+            this.message = 'Invalid Word...';
 
-            return this.message = 'Invalid Word...';
+            return;
         }
 
         Tile.updateStatusesForRow(this.currentRow, this.theWord);
 
         if (this.currentGuess === this.theWord) {
             this.state = 'complete';
-
-            return this.message = 'You Win!';
-        }
-
-        if (this.remainingGuesses === 0) {
+            this.message = 'You Win!';
+        }else if(this.remainingGuesses === 0) {
             this.state = 'complete';
-
-            return this.message = 'Game Over. You Lose.';
+            this.message = `Game Over. You Lose. (${this.theWord})`;
+        }else {
+            this.currentRowIndex++;
+            this.message = 'Incorrect';
         }
-
-        this.currentRowIndex++;
-
-        return this.message = 'Incorrect';
-
-
     }
 }
