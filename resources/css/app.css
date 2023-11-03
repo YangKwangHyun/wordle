@@ -5,6 +5,9 @@
     --invalid-color: #ff3f3f;
 }
 
+
+
+
 html, body {
     height: 100%;
 }
@@ -132,4 +135,35 @@ output:empty {
     height: 50px;
     min-width: 40px;
     margin: 2px;
+}
+
+/* 모바일 기기 (가로 600px 이하) */
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.2rem; /* 작은 제목 크기 */
+        margin-bottom: 1rem;
+    }
+
+    #game {
+        width: 90%; /* 전체 화면의 90%를 사용 */
+        margin: 0 5%; /* 양쪽 여백을 5%씩 설정 */
+    }
+
+    /*.tile {*/
+    /*    width: 60px;*/
+    /*    height: 60px; !* 타일 높이 축소 *!*/
+    /*    font-size: 2em; !* 폰트 크기는 em 단위로 상대적 조절 *!*/
+    /*}*/
+
+    .key {
+        min-width: 30px; /* 키보드 키의 최소 너비 축소 */
+        min-height: 35px; /* 키보드 키의 높이 축소 */
+        margin: 1px;
+    }
+
+    output {
+        right: -3rem; /* 오른쪽 여백 조정 */
+        top: 2.5rem; /* 상단 여백 조정 */
+        font-size: 0.8rem; /* 출력 폰트 크기 조정 */
+    }
 }
