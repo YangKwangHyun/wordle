@@ -1,12 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --correct-color: #47d747;
     --present-color: #f7f749;
     --absent-color: #888;
     --invalid-color: #ff3f3f;
 }
-
-
-
 
 html, body {
     height: 100%;
@@ -103,8 +104,32 @@ h1 {
     background: var(--absent-color);
 }
 
+.key.enter {
+    background: #62ce7c;
+    color: white;
+    box-shadow: 0 0 12px rgba(38, 246, 110, 0.42);
+}
+
+.key.backspace {
+    background: #62ce7c;
+    color: white;
+    box-shadow: 0 0 12px rgba(38, 246, 110, 0.42);
+}
+
 header {
     position: relative;
+}
+
+hint {
+    text-align: center;
+    display: block;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    width: 150px;
 }
 
 output {

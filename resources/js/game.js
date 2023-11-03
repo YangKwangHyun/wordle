@@ -30,16 +30,22 @@ export default {
 
     init() {
         this.board = Array.from({length: this.guessesAllowed}, () => {
-            return Array.from({length: this.theWord.length}, (item, index) => new Tile(index));
+            return Array.from({length: this.theWord.word.length}, (item, index) => new Tile(index));
         })
+
+        this.hint = this.theWord.hint;
     },
 
     matchingTileForKey(key) {
+        if (key === 'Enter' || key === 'Backspace') {
+            return {status: key.toLowerCase()}; // 이를 통해 "enter" 또는 "backspace" 클래스를 반환합니다.
+        }
+
         return this.board
             .flat()
             .filter((tile) => tile.status)
-            .sort((t1,t2) => {
-              return t1.status === 'correct' ? -1 : 1;
+            .sort((t1, t2) => {
+                return t1.status === 'correct' ? -1 : 1;
             })
             .find((tile) => tile.letter === key.toLowerCase());
     },
@@ -61,7 +67,6 @@ export default {
         for (let tile of this.currentRow) {
             if (!tile.letter) {
                 tile.fill(key);
-
                 break;
             }
         }
@@ -78,7 +83,7 @@ export default {
     },
 
     submitGuess() {
-        if (this.currentGuess.length < this.theWord.length) return;
+        if (this.currentGuess.length < this.theWord.word.length) return;
 
         if (!allWords.includes(this.currentGuess.toUpperCase())) {
             this.errors = true;
@@ -87,17 +92,26 @@ export default {
             return;
         }
 
-        Tile.updateStatusesForRow(this.currentRow, this.theWord);
+        Tile.updateStatusesForRow(this.currentRow, this.theWord.word);
 
-        if (this.currentGuess === this.theWord) {
+        if (this.currentGuess === this.theWord.word) {
             this.state = 'complete';
             this.message = 'You Win!';
-        }else if(this.remainingGuesses === 0) {
+        } else if (this.remainingGuesses === 0) {
             this.state = 'complete';
-            this.message = `Game Over. You Lose. (${this.theWord})`;
-        }else {
+            this.message = `Game Over. You Lose. (${this.theWord.word})`;
+        } else {
             this.currentRowIndex++;
             this.message = 'Incorrect';
         }
+    },
+
+    handleClick(event) {
+        const button = event.target.closest('button');
+
+        // key는 data-key 속성을 통해 전달됩니다.
+        const key = button.dataset.key;
+
+        this.onKeyPress(key);
     }
 }

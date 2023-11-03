@@ -1,5 +1,33 @@
 export let theWords = [
-    "cat", "dog", "kid", "mom", "dad", "big", "hat"
+    // 3글자 영문과 힌트
+    {
+        'word': 'cat',
+        'hint': 'Pet'
+    },
+    {
+        'word': 'dog',
+        'hint': 'Pet'
+    },
+    {
+        'word': 'kid',
+        'hint': 'Family'
+    },
+    {
+        'word': 'mom',
+        'hint': 'Family'
+    },
+    {
+        'word': 'dad',
+        'hint': 'Family'
+    },
+    {
+        'word': 'big',
+        'hint': 'Size'
+    },
+    {
+        'word': 'hat',
+        'hint': 'Clothes'
+    }
 ];
 
 export let allWords =
